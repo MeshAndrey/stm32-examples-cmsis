@@ -127,7 +127,7 @@ void JTAG_Set(uint8_t mode)
 	AFIO->MAPR |= temp;       
 } 
 
-void Stm32_Clock_Init(uin8_t PLL)
+void Stm32_Clock_Init(uint8_t PLL)
 {
 	unsigned char temp = 0;   
 	MYRCC_DeInit();		  
