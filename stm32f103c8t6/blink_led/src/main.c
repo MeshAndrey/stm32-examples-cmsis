@@ -51,7 +51,7 @@
   * @param  None
   * @retval None
   */
-void 
+void
 configure_gpio(void)
 {
 	/* Enable power for GPIO PORT C */
@@ -66,9 +66,9 @@ configure_gpio(void)
 
 /**
   * @brief  This function :
-             - Makes simple delay.
-			This function is only for educational purposes.
-			Do not use it another time. 
+  *          - Makes simple delay.
+  *         This function is only for educational purposes.
+  *         Do not use it in real application. 
   * @param  uint32_t delay time
   * @retval None
   */
@@ -84,10 +84,11 @@ delay(uint32_t time)
 
 /**
   * @brief  Main program.
+  *         User program starts from here.
   * @param  None
   * @retval None
   */
-int 
+int
 main(void)
 {
 	configure_gpio();
@@ -99,10 +100,12 @@ main(void)
 		
 		/* Set bit 13 of Port C bit set/reset register */
 		GPIOC->BSRR = GPIO_BSRR_BS13;
+        /* Some delay */
 		delay(time);
 		
 	    /* Reset bit 13 of Port C bit set/reset register */
 		GPIOC->BSRR = GPIO_BSRR_BR13;
+		/* Some delay*/
 		delay(time);
 	}
 }
