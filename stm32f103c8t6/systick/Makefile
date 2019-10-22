@@ -1,4 +1,4 @@
-PRJ_NAME   = Systick_ex
+PRJ_NAME   = Systick_example
 CC         = arm-none-eabi-gcc
 SRCDIR     = src
 SRC        = $(wildcard $(SRCDIR)/*.c)
