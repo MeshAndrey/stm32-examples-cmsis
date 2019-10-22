@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    blink_led/src/main.c 
   * @author  Meshcheryakov Andrey
-  * @version V0.0.1
-  * @date    23-September-2019
+  * @version V0.0.2
+  * @date    22-October-2019
   * @brief   This code example shows how to configure the GPIOs.
   *
  ===============================================================================
