@@ -83,7 +83,7 @@ delay(uint32_t time)
 }
 
 /**
-  * @brief  Main program.
+  * @brief  Main function.
   *         User program starts from here.
   * @param  None
   * @retval None
