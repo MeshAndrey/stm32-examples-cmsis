@@ -60,7 +60,7 @@ configure_gpio(void)
 	/* Clear PC13 control register bits */
 	GPIOC->CRH &= ~(GPIO_CRH_MODE13 | GPIO_CRH_CNF13);
 
-	/* Configure PA1 and PA2 as Push Pull output at max 10Mhz */
+	/* Configure PC13 as Push Pull output at max 10Mhz */
     GPIOC->CRH |= GPIO_CRH_MODE13_0;
 }
 
