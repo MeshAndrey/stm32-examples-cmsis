@@ -48,7 +48,6 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 volatile uint32_t time;
-volatile uint8_t  flag;
 
 /* End of private variables --------------------------------------------------*/
 
@@ -105,7 +104,6 @@ main(void)
     init_SysTick();
     
 	time = 0;
-	flag = 0;
 
     /* Infinite loop */
 	while(1)
