@@ -110,18 +110,10 @@ main(void)
     /* Infinite loop */
 	while(1)
 	{
-		if (time == 0 && flag == 0)
+		if (time == 0)
 		{
-			GPIOC->BSRR = GPIO_BSRR_BS13;
+			GPIOC->ODR ^= GPIO_BSRR_BS13; // invert bit 13 of Port C
 			time = 1000;
-			flag = 1;
-		}
-
-		if (time == 0 && flag == 1)	
-	    {
-			GPIOC->BSRR = GPIO_BSRR_BR13;
-			time = 1000;
-			flag = 0;
 		}
 	}
 }
