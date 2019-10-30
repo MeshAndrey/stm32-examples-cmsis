@@ -14,7 +14,15 @@
    - USART1
    - GPIO:
    		    PC13 - LED
-            PA9 && PA10 - UART
+            PA9  - MCU's UART Tx
+            PA10 - MCU's UART Rx - Not used in this example
+
+===============================================================================
+                    #####       Another Resources     #####
+===============================================================================
+   - UART to USB adapter (CP2102 as example)
+   - Use terminal program to see what is being received.
+     Use picocom, PuTTY, etc.
    
  ===============================================================================
                     ##### How to use this example #####
@@ -30,7 +38,13 @@
    - Compile this code.
    - Flash target device.
    - Green LED is inverting every second.
-   - TODO: Complete this place of docs.
+   - UART is sending data every second. So you need to use terminal program.
+     For picocom:
+         $ sudo picocom /dev/ttyUSB0 -b9600
+     Where /dev/ttyUSB0 - full path to device. It may be different from this.
+           -b9600       - parameter of baudrate. This example uses 9600 baud.
+     sudo permission is needed. 
+   - Watch on received data.
   *    
   ******************************************************************************
   */
@@ -151,7 +165,7 @@ static void
 send_text(char array[])
 {
 	for(uint8_t i = 0; i < strlen(array); i++)
-		send_byte(array[i]);
+        send_byte(array[i]);
 }
 
 /**
@@ -174,7 +188,7 @@ main(void)
 		if (delay_time == 0)
 		{
 			sprintf(text, "%d\r\n", (int)counter);    		
-			send_text_to_uart(text);
+			send_text(text);
 			counter++;
 
 			GPIOC->ODR ^= GPIO_ODR_ODR13;
