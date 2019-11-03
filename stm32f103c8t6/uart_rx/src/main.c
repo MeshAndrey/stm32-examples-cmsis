@@ -180,26 +180,27 @@ SysTick_Handler(void)
 
 }
 
-void USART1_IRQHandler(void)
+/**
+  * @brief  USART1 interrupt handler.
+  *         
+  * @param  None
+  * @retval None
+  */
+void 
+USART1_IRQHandler(void)
 {
-    uint8_t chartoreceive = 0;
+    uint8_t char_to_receive = 0;
   
     if((USART1->SR & USART_SR_RXNE) == USART_SR_RXNE)
     {
-        chartoreceive = (uint8_t)(USART1->DR); /* Receive data, clear flag */
+        char_to_receive = (uint8_t)(USART1->DR); /* Receive data, clear flag */
           
-        switch(chartoreceive)
+        switch(char_to_receive)
         {
             case '0':
                 GPIOC->BSRR = GPIO_BSRR_BS13;
                 break;
             case '1': 
-                GPIOC->BSRR = GPIO_BSRR_BR13;
-                break;
-			case 0:
-                GPIOC->BSRR = GPIO_BSRR_BS13;
-                break;
-            case 1: 
                 GPIOC->BSRR = GPIO_BSRR_BR13;
                 break;
             default: 
