@@ -1,4 +1,4 @@
-PRJ_NAME   = UART_TX
+PRJ_NAME   = UART_RX
 CC         = arm-none-eabi-gcc
 SRCDIR     = src
 SRC        = $(wildcard $(SRCDIR)/*.c)
