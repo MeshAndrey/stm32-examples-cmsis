@@ -162,6 +162,8 @@ main(void)
 	init_SysTick();
 	init_uart();
 
+	GPIOC->BSRR = GPIO_BSRR_BS13; // switch off led by default
+
 	while(1)
 	{				
 
