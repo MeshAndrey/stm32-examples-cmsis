@@ -17,7 +17,7 @@ void SysTick_init(void)
 {
     SysTick->LOAD = TimerTick;
     SysTick->VAL  = TimerTick;
-    SysTick->CTRL =	SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_TICKINT_Msk | SysTick_CTRL_ENABLE_Msk;
+    SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_TICKINT_Msk | SysTick_CTRL_ENABLE_Msk;
 }
 
 void init_gpio_led(void)
@@ -32,13 +32,13 @@ void init_gpio_uart(void)
 {
     RCC->APB2ENR |= RCC_APB2ENR_IOPAEN | RCC_APB2ENR_AFIOEN;    // GPIOA Clock ON. Alter function clock ON
 
-    GPIOA->CRH	 &= ~GPIO_CRH_CNF9;                             // Clear CNF bit 9
-    GPIOA->CRH	 |= GPIO_CRH_CNF9_1;                            // Set CNF bit 9 to 10 - AFIO Push-Pull
-    GPIOA->CRH	 |= GPIO_CRH_MODE9_0;                           // Set MODE bit 9 to Mode 01 = 10MHz
+    GPIOA->CRH   &= ~GPIO_CRH_CNF9;                             // Clear CNF bit 9
+    GPIOA->CRH   |= GPIO_CRH_CNF9_1;                            // Set CNF bit 9 to 10 - AFIO Push-Pull
+    GPIOA->CRH   |= GPIO_CRH_MODE9_0;                           // Set MODE bit 9 to Mode 01 = 10MHz
 
-    GPIOA->CRH	 &= ~GPIO_CRH_CNF10;                            // Clear CNF bit 10
-    GPIOA->CRH	 |= GPIO_CRH_CNF10_0;                           // Set CNF bit 10 to 01 = HiZ
-    GPIOA->CRH	 &= ~GPIO_CRH_MODE10;                           // Set MODE bit 10 to Mode 01 = 10MHz
+    GPIOA->CRH   &= ~GPIO_CRH_CNF10;                            // Clear CNF bit 10
+    GPIOA->CRH   |= GPIO_CRH_CNF10_0;                           // Set CNF bit 10 to 01 = HiZ
+    GPIOA->CRH   &= ~GPIO_CRH_MODE10;                           // Set MODE bit 10 to Mode 01 = 10MHz
 }
 
 void init_gpio_adc(void)
@@ -136,6 +136,6 @@ int main(void)
 
 void SysTick_Handler(void)
 {
-	if (delay_time > 0)
-		delay_time--;
+    if (delay_time > 0)
+        delay_time--;
 }
