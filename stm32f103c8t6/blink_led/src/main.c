@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    blink_led/src/main.c 
   * @author  Meshcheryakov Andrey
-  * @version V0.0.2
-  * @date    22-October-2019
+  * @version V0.0.3
+  * @date    02-January-2020
   * @brief   This code example shows how to configure the GPIOs.
   *
  ===============================================================================
@@ -11,7 +11,7 @@
  ===============================================================================
    - RCC
    - GPIO:
-   		    PC13 - LED
+               PC13 - LED
    
  ===============================================================================
                     ##### How to use this example #####
@@ -28,7 +28,7 @@
    - Flash target device.
    - LED is blinking.
 
-  *    
+  *
   ******************************************************************************
   */
 
@@ -54,19 +54,19 @@
 void
 configure_gpio(void)
 {
-	/* Enable power for GPIO PORT C */
-	RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
+    /* Enable power for GPIO PORT C */
+    RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
 
-	/* Clear PC13 control register bits */
-	GPIOC->CRH &= ~(GPIO_CRH_MODE13 | GPIO_CRH_CNF13);
+    /* Clear PC13 control register bits */
+    GPIOC->CRH &= ~(GPIO_CRH_MODE13 | GPIO_CRH_CNF13);
 
-	/* Configure PC13 as Push Pull output at max 10Mhz */
+    /* Configure PC13 as Push Pull output at max 10Mhz */
     GPIOC->CRH |= GPIO_CRH_MODE13_0;
 }
 
 /**
   * @brief  This function :
-  *          - Makes simple delay.
+  *          - Makes a simple delay.
   *         This function is only for educational purposes.
   *         Do not use it in real application. 
   * @param  uint32_t delay time
@@ -76,10 +76,10 @@ void
 delay(uint32_t time)
 {
     while(time--)
-	    __asm 		// inline asm - syntax for gcc with c99
-	    (
-	  	    "nop"				  
-	    );
+        __asm         // inline asm - syntax for gcc with c99 
+        (
+              "nop"
+        );
 }
 
 /**
@@ -91,23 +91,23 @@ delay(uint32_t time)
 int
 main(void)
 {
-	configure_gpio();
+    configure_gpio();
 
-	/* Infinite loop */
-	while(1)
-	{
-		uint32_t time = 1000000;	
-		
-		/* Set bit 13 of Port C bit set/reset register */
-		GPIOC->BSRR = GPIO_BSRR_BS13;
+    /* Infinite loop */
+    while(1)
+    {
+        uint32_t time = 1000000;    
+        
+        /* Set bit 13 of Port C bit set/reset register */
+        GPIOC->BSRR = GPIO_BSRR_BS13;
         /* Some delay */
-		delay(time);
-		
-	    /* Reset bit 13 of Port C bit set/reset register */
-		GPIOC->BSRR = GPIO_BSRR_BR13;
-		/* Some delay*/
-		delay(time);
-	}
+        delay(time);
+        
+        /* Reset bit 13 of Port C bit set/reset register */
+        GPIOC->BSRR = GPIO_BSRR_BR13;
+        /* Some delay*/
+        delay(time);
+    }
 }
 
 /****************************** END OF FILE ***********************************/
