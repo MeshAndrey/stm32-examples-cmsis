@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    systick/src/main.c 
   * @author  Meshcheryakov Andrey
-  * @version V0.0.1
-  * @date    22-October-2019
+  * @version V0.0.2
+  * @date    4-January-2020
   * @brief   This code example shows how to use system timer (SysTick) with IT.
   *
  ===============================================================================
@@ -12,7 +12,7 @@
    - RCC
    - SysTick
    - GPIO:
-   		    PC13 - LED
+               PC13 - LED
    
  ===============================================================================
                     ##### How to use this example #####
@@ -41,8 +41,8 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define F_CPU 		8000000UL		// CPU frequency
-#define TimerTick	F_CPU/1000-1
+#define F_CPU        8000000UL        // 8 MHz CPU frequency
+#define TimerTick    F_CPU/1000-1
 /* End of private defines ----------------------------------------------------*/
 
 /* Private macro -------------------------------------------------------------*/
@@ -67,8 +67,8 @@ static void
 init_gpio(void)
 {
     /* Enable power for GPIO PORT C */
-	RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
-	
+    RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
+    
     /* Clear PC13 control register bits */
     GPIOC->CRH &= ~(GPIO_CRH_MODE13 | GPIO_CRH_CNF13);
 
@@ -85,9 +85,9 @@ init_gpio(void)
 static void 
 init_SysTick(void)
 {
-	SysTick->LOAD = TimerTick;
-	SysTick->VAL  = TimerTick;
-	SysTick->CTRL =	SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_TICKINT_Msk
+    SysTick->LOAD = TimerTick;
+    SysTick->VAL  = TimerTick;
+    SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_TICKINT_Msk
                                                | SysTick_CTRL_ENABLE_Msk;
 }
 
@@ -100,20 +100,20 @@ init_SysTick(void)
 int 
 main(void)
 {
-	init_gpio();
+    init_gpio();
     init_SysTick();
     
-	time = 0;
+    time = 0;
 
     /* Infinite loop */
-	while(1)
-	{
-		if (time == 0)
-		{
-			GPIOC->ODR ^= GPIO_BSRR_BS13; // invert bit 13 of Port C
-			time = 1000;
-		}
-	}
+    while(1)
+    {
+        if (time == 0)
+        {
+            GPIOC->ODR ^= GPIO_BSRR_BS13; // invert bit 13 of Port C
+            time = 1000;
+        }
+    }
 }
 
 
@@ -125,7 +125,7 @@ main(void)
   */
 void SysTick_Handler(void)
 {
-	time--;
+    time--;
 }
 
 /****************************** END OF FILE ***********************************/
