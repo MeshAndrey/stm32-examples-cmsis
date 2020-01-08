@@ -97,7 +97,7 @@ init_SysTick(void)
   * @param  None
   * @retval None
   */
-int 
+int
 main(void)
 {
     init_gpio();
@@ -123,7 +123,8 @@ main(void)
   * @param  None
   * @retval None
   */
-void SysTick_Handler(void)
+void
+SysTick_Handler(void)
 {
     time--;
 }
