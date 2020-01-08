@@ -1,11 +1,12 @@
 #include "stm32f103xb.h"
 
 #define F_CPU         8000000UL
-#define TimerTick    F_CPU/1000-1
+#define TimerTick     F_CPU/1000-1
 
 void TIM2_IRQHandler(void);
 
-void init_gpio(void)
+void
+init_gpio(void)
 {
     RCC->APB2ENR |= RCC_APB2ENR_IOPCEN | RCC_APB2ENR_AFIOEN; 
 
@@ -13,7 +14,8 @@ void init_gpio(void)
     GPIOC->CRH |= GPIO_CRH_MODE13_0;  
 }
 
-void init_tim2(void)
+void
+init_tim2(void)
 {
     RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
 
@@ -32,7 +34,8 @@ void init_tim2(void)
     NVIC_SetPriority(TIM2_IRQn, 0);
 }
 
-int main(void)
+int
+main(void)
 {
     init_gpio(); 
     init_tim2();
@@ -41,11 +44,11 @@ int main(void)
 
     while(1)
     {
-        
     }
 }
 
-void TIM2_IRQHandler(void)
+void
+TIM2_IRQHandler(void)
 {
     TIM2->SR &= ~TIM_SR_UIF;
 
