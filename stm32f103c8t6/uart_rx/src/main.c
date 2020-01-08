@@ -13,7 +13,7 @@
    - SysTick
    - USART1
    - GPIO:
-   		    PC13 - LED
+               PC13 - LED
             PA9  - MCU's UART Tx - Not used in this example
             PA10 - MCU's UART Rx
 
@@ -59,8 +59,8 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define F_CPU 		8000000UL
-#define TimerTick	F_CPU/1000-1
+#define F_CPU         8000000UL
+#define TimerTick    F_CPU/1000-1
 #define TEXT_BUF    16
 /* End of private defines ----------------------------------------------------*/
 
@@ -87,9 +87,9 @@ void SysTick_Handler(void);
 static void 
 init_SysTick(void)
 {
-	SysTick->LOAD = TimerTick;
-	SysTick->VAL  = TimerTick;
-	SysTick->CTRL =	SysTick_CTRL_CLKSOURCE_Msk | 
+    SysTick->LOAD = TimerTick;
+    SysTick->VAL  = TimerTick;
+    SysTick->CTRL =    SysTick_CTRL_CLKSOURCE_Msk | 
                       SysTick_CTRL_TICKINT_Msk | SysTick_CTRL_ENABLE_Msk;
 }
 
@@ -102,9 +102,9 @@ init_SysTick(void)
 static void 
 init_gpio_led(void)
 {
-	RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
+    RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
 
-	GPIOC->CRH &= ~(GPIO_CRH_MODE13 | GPIO_CRH_CNF13);
+    GPIOC->CRH &= ~(GPIO_CRH_MODE13 | GPIO_CRH_CNF13);
     GPIOC->CRH |= GPIO_CRH_MODE13_0;
 }
 
@@ -117,15 +117,15 @@ init_gpio_led(void)
 static void 
 init_gpio_uart(void)
 {
-	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN | RCC_APB2ENR_AFIOEN; 	// GPIOA Clock ON. Alter function clock ON
+    RCC->APB2ENR |= RCC_APB2ENR_IOPAEN | RCC_APB2ENR_AFIOEN;     // GPIOA Clock ON. Alter function clock ON
 
-	GPIOA->CRH	 &= ~GPIO_CRH_CNF9; 							// Clear CNF bit 9
-	GPIOA->CRH	 |= GPIO_CRH_CNF9_1;							// Set CNF bit 9 to 10 - AFIO Push-Pull
-	GPIOA->CRH	 |= GPIO_CRH_MODE9_0;							// Set MODE bit 9 to Mode 01 = 10MHz
+    GPIOA->CRH     &= ~GPIO_CRH_CNF9;                             // Clear CNF bit 9
+    GPIOA->CRH     |= GPIO_CRH_CNF9_1;                            // Set CNF bit 9 to 10 - AFIO Push-Pull
+    GPIOA->CRH     |= GPIO_CRH_MODE9_0;                            // Set MODE bit 9 to Mode 01 = 10MHz
 
-	GPIOA->CRH	 &= ~GPIO_CRH_CNF10;							// Clear CNF bit 9
-	GPIOA->CRH	 |= GPIO_CRH_CNF10_0;							// Set CNF bit 9 to 01 = HiZ
-	GPIOA->CRH	 &= ~GPIO_CRH_MODE10;							// Set MODE bit 9 to Mode 01 = 10MHz
+    GPIOA->CRH     &= ~GPIO_CRH_CNF10;                            // Clear CNF bit 9
+    GPIOA->CRH     |= GPIO_CRH_CNF10_0;                            // Set CNF bit 9 to 01 = HiZ
+    GPIOA->CRH     &= ~GPIO_CRH_MODE10;                            // Set MODE bit 9 to Mode 01 = 10MHz
 }
 
 /**
@@ -137,13 +137,13 @@ init_gpio_uart(void)
 static void
 init_uart(void)
 {
-	RCC->APB2ENR |= RCC_APB2ENR_USART1EN;						// USART1 Clock ON
-	USART1->BRR   = 0x341;										// Baudrate for 9600 on 8Mhz
-	USART1->CR1  |= USART_CR1_RXNEIE | 
-                        USART_CR1_UE | USART_CR1_TE | USART_CR1_RE;	// USART1 ON, TX ON, RX ON
+    RCC->APB2ENR |= RCC_APB2ENR_USART1EN;                        // USART1 Clock ON
+    USART1->BRR   = 0x341;                                        // Baudrate for 9600 on 8Mhz
+    USART1->CR1  |= USART_CR1_RXNEIE | 
+                        USART_CR1_UE | USART_CR1_TE | USART_CR1_RE;    // USART1 ON, TX ON, RX ON
 
     NVIC_SetPriority(USART1_IRQn, 0); /* (3) */
-    NVIC_EnableIRQ(USART1_IRQn); /* (4) */						
+    NVIC_EnableIRQ(USART1_IRQn); /* (4) */                        
 }
 
 
@@ -156,18 +156,18 @@ init_uart(void)
 int 
 main(void)
 {
-	init_gpio_led();
-	init_gpio_uart();
+    init_gpio_led();
+    init_gpio_uart();
 
-	init_SysTick();
-	init_uart();
+    init_SysTick();
+    init_uart();
 
-	GPIOC->BSRR = GPIO_BSRR_BS13; // switch off led by default
+    GPIOC->BSRR = GPIO_BSRR_BS13; // switch off led by default
 
-	while(1)
-	{				
+    while(1)
+    {                
 
-	}
+    }
 }
 
 /**
