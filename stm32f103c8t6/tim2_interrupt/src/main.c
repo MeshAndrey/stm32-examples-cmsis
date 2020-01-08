@@ -5,7 +5,7 @@
 
 void TIM2_IRQHandler(void);
 
-void
+static void
 init_gpio(void)
 {
     RCC->APB2ENR |= RCC_APB2ENR_IOPCEN | RCC_APB2ENR_AFIOEN; 
@@ -14,7 +14,7 @@ init_gpio(void)
     GPIOC->CRH |= GPIO_CRH_MODE13_0;  
 }
 
-void
+static void
 init_tim2(void)
 {
     RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
