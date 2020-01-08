@@ -4,7 +4,8 @@
 #define RESET              0
 #define SET                1
 
-void delay(uint32_t time)
+void
+delay(uint32_t time)
 {
     while(time--)
     {
@@ -16,9 +17,12 @@ void delay(uint32_t time)
 
 }
 
-void init_gpio(void)
+void
+init_gpio(void)
 {
-    RCC->APB2ENR |= RCC_APB2ENR_IOPAEN | RCC_APB2ENR_IOPCEN | RCC_APB2ENR_AFIOEN; // Disable JTAG
+    RCC->APB2ENR |= RCC_APB2ENR_IOPAEN | RCC_APB2ENR_IOPCEN 
+                                       | RCC_APB2ENR_AFIOEN; // Disable JTAG
+
     AFIO->MAPR |= AFIO_MAPR_SWJ_CFG_JTAGDISABLE;
 
     // Clear PC13 control register bits
@@ -27,7 +31,8 @@ void init_gpio(void)
     GPIOC->CRH |= GPIO_CRH_MODE13_0;
 }
 
-void init_rcc(void)
+void
+init_rcc(void)
 {
     volatile uint32_t StartUpCounter = 0, HSEStatus = 0; // timeout counter for HSE
 
@@ -96,7 +101,8 @@ void init_rcc(void)
 }
 
 
-int main(void)
+int
+main(void)
 {
     init_rcc();
     init_gpio();
