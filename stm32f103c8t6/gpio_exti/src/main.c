@@ -29,7 +29,7 @@
           Write comments
           Fix codestyle
 
-  *    
+  *
   ******************************************************************************
   */
 
@@ -80,7 +80,8 @@ configure_externalIT(void)
     NVIC_SetPriority(EXTI0_IRQn, 0);
 }
 
-void EXTI0_IRQHandler(void)
+void
+EXTI0_IRQHandler(void)
 {
     if ((EXTI->PR & 0x0001) != 0)  /* Check line 0 has triggered the IT */
     {
@@ -103,7 +104,7 @@ delay(uint32_t time)
     while(time--)
         __asm         // inline asm - syntax for gcc with c99
         (
-              "nop"                  
+              "nop"
         );
 }
 
