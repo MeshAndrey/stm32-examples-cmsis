@@ -1,7 +1,7 @@
 /**
  * This example shows the basics of using a PWM.
  * Using - LED - PC13 - toggles in main loop
- *          - LED - PA1  - toggles by PWM. 
+ *       - LED - PA1  - toggles by PWM. 
  *     
  * Period of pulse is 1 sec.
  * Duty of pulse is 0.5 sec = 500 ms = 500000 us
@@ -19,7 +19,7 @@ volatile uint8_t  flag;
 
 void SysTick_Handler(void);
 
-void
+static void
 init_gpio(void)
 {
     RCC->APB2ENR |= RCC_APB2ENR_IOPAEN | RCC_APB2ENR_IOPCEN 
@@ -37,7 +37,7 @@ init_gpio(void)
     GPIOA->CRL &= ~GPIO_CRL_MODE1_0;
 }
 
-void
+static void
 init_tim2(void)
 {
     RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
@@ -65,7 +65,7 @@ init_tim2(void)
     NVIC_SetPriority(TIM2_IRQn, 0);
 }
 
-void
+static void
 SysTick_init(void)
 {
     SysTick->LOAD = TimerTick;
@@ -93,7 +93,7 @@ main(void)
             flag = 1;
         }
 
-        if (time == 0 && flag == 1)    
+        if (time == 0 && flag == 1)
         {
             GPIOC->BSRR = GPIO_BSRR_BR13;
             time = 1000;
