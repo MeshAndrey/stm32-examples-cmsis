@@ -7,6 +7,7 @@
  * Duty of pulse is 0.5 sec = 500 ms = 500000 us
  * This values are set up by timer's settings.
  * 
+ * TODO: replace code in while of main
  */
 
 #include "stm32f103xb.h"
