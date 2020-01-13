@@ -13,7 +13,7 @@
    - SysTick
    - USART1
    - GPIO:
-   		    PC13 - LED
+               PC13 - LED
             PA9  - MCU's UART Tx
             PA10 - MCU's UART Rx - Not used in this example
 
@@ -58,8 +58,8 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define F_CPU 		8000000UL
-#define TimerTick	F_CPU/1000-1
+#define F_CPU         8000000UL
+#define TimerTick    F_CPU/1000-1
 #define TEXT_BUF    16
 /* End of private defines ----------------------------------------------------*/
 
@@ -67,7 +67,7 @@
 /* Private variables ---------------------------------------------------------*/
 volatile uint32_t counter = 0;
 volatile uint32_t delay_time = 0;
- 			 char text[TEXT_BUF];
+              char text[TEXT_BUF];
 
 /* End of private variables --------------------------------------------------*/
 
@@ -86,9 +86,9 @@ void SysTick_Handler(void);
 static void 
 init_SysTick(void)
 {
-	SysTick->LOAD = TimerTick;
-	SysTick->VAL  = TimerTick;
-	SysTick->CTRL =	SysTick_CTRL_CLKSOURCE_Msk | 
+    SysTick->LOAD = TimerTick;
+    SysTick->VAL  = TimerTick;
+    SysTick->CTRL =    SysTick_CTRL_CLKSOURCE_Msk | 
                       SysTick_CTRL_TICKINT_Msk | SysTick_CTRL_ENABLE_Msk;
 }
 
@@ -101,9 +101,9 @@ init_SysTick(void)
 static void 
 init_gpio_led(void)
 {
-	RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
+    RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
 
-	GPIOC->CRH &= ~(GPIO_CRH_MODE13 | GPIO_CRH_CNF13);
+    GPIOC->CRH &= ~(GPIO_CRH_MODE13 | GPIO_CRH_CNF13);
     GPIOC->CRH |= GPIO_CRH_MODE13_0;
 }
 
@@ -116,15 +116,15 @@ init_gpio_led(void)
 static void 
 init_gpio_uart(void)
 {
-	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN | RCC_APB2ENR_AFIOEN; 	// GPIOA Clock ON. Alter function clock ON
+    RCC->APB2ENR |= RCC_APB2ENR_IOPAEN | RCC_APB2ENR_AFIOEN;     // GPIOA Clock ON. Alter function clock ON
 
-	GPIOA->CRH	 &= ~GPIO_CRH_CNF9; 							// Clear CNF bit 9
-	GPIOA->CRH	 |= GPIO_CRH_CNF9_1;							// Set CNF bit 9 to 10 - AFIO Push-Pull
-	GPIOA->CRH	 |= GPIO_CRH_MODE9_0;							// Set MODE bit 9 to Mode 01 = 10MHz
+    GPIOA->CRH     &= ~GPIO_CRH_CNF9;                             // Clear CNF bit 9
+    GPIOA->CRH     |= GPIO_CRH_CNF9_1;                            // Set CNF bit 9 to 10 - AFIO Push-Pull
+    GPIOA->CRH     |= GPIO_CRH_MODE9_0;                            // Set MODE bit 9 to Mode 01 = 10MHz
 
-	GPIOA->CRH	 &= ~GPIO_CRH_CNF10;							// Clear CNF bit 9
-	GPIOA->CRH	 |= GPIO_CRH_CNF10_0;							// Set CNF bit 9 to 01 = HiZ
-	GPIOA->CRH	 &= ~GPIO_CRH_MODE10;							// Set MODE bit 9 to Mode 01 = 10MHz
+    GPIOA->CRH     &= ~GPIO_CRH_CNF10;                            // Clear CNF bit 9
+    GPIOA->CRH     |= GPIO_CRH_CNF10_0;                            // Set CNF bit 9 to 01 = HiZ
+    GPIOA->CRH     &= ~GPIO_CRH_MODE10;                            // Set MODE bit 9 to Mode 01 = 10MHz
 }
 
 /**
@@ -136,9 +136,9 @@ init_gpio_uart(void)
 static void
 init_uart(void)
 {
-	RCC->APB2ENR |= RCC_APB2ENR_USART1EN;						// USART1 Clock ON
-	USART1->BRR   = 0x341;										// Baudrate for 9600 on 8Mhz
-	USART1->CR1  |= USART_CR1_UE | USART_CR1_TE | USART_CR1_RE;	// USART1 ON, TX ON, RX ON						
+    RCC->APB2ENR |= RCC_APB2ENR_USART1EN;                        // USART1 Clock ON
+    USART1->BRR   = 0x341;                                        // Baudrate for 9600 on 8Mhz
+    USART1->CR1  |= USART_CR1_UE | USART_CR1_TE | USART_CR1_RE;    // USART1 ON, TX ON, RX ON                        
 }
 
 /**
@@ -150,9 +150,9 @@ init_uart(void)
 static void 
 send_byte(uint8_t data) 
 {
-	while(!(USART1->SR & USART_SR_TC)); // waiting for bit TC in register SR is 1
+    while(!(USART1->SR & USART_SR_TC)); // waiting for bit TC in register SR is 1
 
-	USART1->DR = data; 				    // send byte throught uart
+    USART1->DR = data;                     // send byte throught uart
 }
 
 /**
@@ -164,7 +164,7 @@ send_byte(uint8_t data)
 static void 
 send_text(char array[])
 {
-	for(uint8_t i = 0; i < strlen(array); i++)
+    for(uint8_t i = 0; i < strlen(array); i++)
         send_byte(array[i]);
 }
 
@@ -177,25 +177,25 @@ send_text(char array[])
 int 
 main(void)
 {
-	init_gpio_led();
-	init_gpio_uart();
+    init_gpio_led();
+    init_gpio_uart();
 
-	init_SysTick();
-	init_uart();
+    init_SysTick();
+    init_uart();
 
-	while(1)
-	{				
-		if (delay_time == 0)
-		{
-			sprintf(text, "%d\r\n", (int)counter);    		
-			send_text(text);
-			counter++;
+    while(1)
+    {                
+        if (delay_time == 0)
+        {
+            sprintf(text, "%d\r\n", (int)counter);            
+            send_text(text);
+            counter++;
 
-			GPIOC->ODR ^= GPIO_ODR_ODR13;
+            GPIOC->ODR ^= GPIO_ODR_ODR13;
 
-			delay_time = 1000;
-		}
-	}
+            delay_time = 1000;
+        }
+    }
 }
 
 /**
@@ -207,8 +207,8 @@ main(void)
 void 
 SysTick_Handler(void)
 {
-	if (delay_time > 0)
-		delay_time--;
+    if (delay_time > 0)
+        delay_time--;
 }
 
 /****************************** END OF FILE ***********************************/
