@@ -17,7 +17,8 @@ void SysTick_init(void)
 {
     SysTick->LOAD = TimerTick;
     SysTick->VAL  = TimerTick;
-    SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_TICKINT_Msk | SysTick_CTRL_ENABLE_Msk;
+    SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_TICKINT_Msk 
+                                               | SysTick_CTRL_ENABLE_Msk;
 }
 
 void init_gpio_led(void)
@@ -53,7 +54,7 @@ void init_uart(void)
     RCC->APB2ENR |= RCC_APB2ENR_USART1EN;                       // USART1 Clock ON
 
     USART1->BRR   = 0x341;                                      // Baudrate for 9600 on 8Mhz
-    USART1->CR1  |= USART_CR1_UE | USART_CR1_TE | USART_CR1_RE;	// USART1 ON, TX ON, RX ON
+    USART1->CR1  |= USART_CR1_UE | USART_CR1_TE | USART_CR1_RE; // USART1 ON, TX ON, RX ON
 }
 
 void init_adc(void)
@@ -79,7 +80,7 @@ uint16_t get_adc_result()
 
     result = ADC1->DR;                                          // read result
 
-    ADC1->CR2 &= ~ADC_CR2_ADON;	                                // Disable ADC1 for lower power //consuption
+    ADC1->CR2 &= ~ADC_CR2_ADON; 																																																																																			                                // Disable ADC1 for lower power //consuption
 
     return result;
 }
