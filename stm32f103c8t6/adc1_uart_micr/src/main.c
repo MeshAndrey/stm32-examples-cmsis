@@ -17,7 +17,7 @@ void SysTick_init(void)
 {
     SysTick->LOAD = TimerTick;
     SysTick->VAL  = TimerTick;
-    SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_TICKINT_Msk 
+    SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_TICKINT_Msk
                                                | SysTick_CTRL_ENABLE_Msk;
 }
 
@@ -80,7 +80,7 @@ uint16_t get_adc_result()
 
     result = ADC1->DR;                                          // read result
 
-    ADC1->CR2 &= ~ADC_CR2_ADON; 																																																																																			                                // Disable ADC1 for lower power //consuption
+    ADC1->CR2 &= ~ADC_CR2_ADON;                                 // Disable ADC1 for lower power //consuption
 
     return result;
 }
