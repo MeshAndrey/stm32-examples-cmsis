@@ -72,7 +72,7 @@ configure_gpio(void)
   * @param  uint32_t delay time
   * @retval None
   */
-void 
+void
 delay(uint32_t time)
 {
     while(time--)
@@ -96,13 +96,13 @@ main(void)
     /* Infinite loop */
     while(1)
     {
-        uint32_t time = 1000000;    
+        uint32_t time = 1000000;
         
         /* Set bit 13 of Port C bit set/reset register */
         GPIOC->BSRR = GPIO_BSRR_BS13;
         /* Some delay */
         delay(time);
-        
+
         /* Reset bit 13 of Port C bit set/reset register */
         GPIOC->BSRR = GPIO_BSRR_BR13;
         /* Some delay*/
